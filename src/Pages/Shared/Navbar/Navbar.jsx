@@ -19,7 +19,7 @@ const Navbar = () => {
     <li><Link>Service</Link></li>
     <li><Link>Blog</Link></li>
     <li><Link>Contacts</Link></li>
-   { user?.email? <li><button onClick={handleLogOut}>Log out</button></li>:
+   { user?.email?<><li><Link to='/bookings'>My bookings</Link></li>  <li><button onClick={handleLogOut}>Log out</button></li></>:
     <li><Link to='/login'>Login</Link></li>}
     
     </>

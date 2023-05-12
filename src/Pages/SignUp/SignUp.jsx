@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
 import { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
+import Swal from 'sweetalert2';
 
 const SignUp = () => {
 
@@ -17,9 +18,20 @@ const SignUp = () => {
         .then(result =>{
             const user = result.user;
             console.log(user);
+            Swal.fire(
+                'Congratulation',
+                'Your account created successfully',
+                'success'
+              )
+              
         })
         .catch(err =>{
             console.log(err);
+            Swal.fire(
+                'Opps!',
+                err.message,
+                'error'
+              )
         })
 
     }
@@ -45,7 +57,7 @@ const SignUp = () => {
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="text" name='email' placeholder="email" className="input input-bordered" />
+                                <input type="text" name='email' required placeholder="email" className="input input-bordered" />
                             </div>
                             <div className="form-control">
                                 <label className="label">

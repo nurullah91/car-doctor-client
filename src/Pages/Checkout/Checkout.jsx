@@ -26,8 +26,6 @@ const Checkout = () => {
             serviceId: _id,
             dueAmount: price
         }
-
-        console.log(booking);
         fetch('http://localhost:5000/bookings', {
             method: 'POST',
             headers:{
@@ -64,21 +62,21 @@ const Checkout = () => {
                             <label className="label">
                                 <span className="label-text">Date</span>
                             </label>
-                            <input type="date" name="date" className="input input-bordered" />
+                            <input type="date" name="date" required className="input input-bordered" />
                         </div>
 
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" name="email" defaultValue={user?.email} className="input input-bordered" />
+                            <input type="email" required name="email" defaultValue={user?.email} className="input input-bordered" />
                         </div>
 
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Due Amount</span>
                             </label>
-                            <input type="text" name="due" defaultValue={'$'+price} className="input input-bordered" />
+                            <input type="text" name="due" defaultValue={'$'+price} className="input input-bordered"  required/>
                         </div>
 
 
