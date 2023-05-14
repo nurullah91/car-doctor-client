@@ -18,8 +18,25 @@ const Login = () => {
         
         signIn(email, password)
         .then(result =>{
-            const user = result.user
-            console.log(user);
+            const user = result.user;
+            const userEmail ={email: user.email};
+
+            fetch('http://localhost:5000/jwt',{
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(userEmail)
+            })
+            .then(res => res.json())
+            .then(data =>{
+                // set token to the local storage ...remainder this is not best way to save access token in local storage. this is the second best way
+
+                localStorage.setItem('car-access-token', data.token);
+            })
+
+
+
             navigate(from, { replace: true });
         })
         .catch(err => console.log(err))
