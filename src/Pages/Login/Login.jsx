@@ -2,44 +2,28 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
 import { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
 const Login = () => {
 
-    const {signIn} = useContext(AuthContext)
+    const { signIn } = useContext(AuthContext)
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
 
-    const handleLogin = event =>{
+    const handleLogin = event => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        
+
         signIn(email, password)
-        .then(result =>{
-            const user = result.user;
-            const userEmail ={email: user.email};
-
-            fetch('http://localhost:5000/jwt',{
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(userEmail)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                navigate(from, { replace: true });
             })
-            .then(res => res.json())
-            .then(data =>{
-                // set token to the local storage ...remainder this is not best way to save access token in local storage. this is the second best way
-
-                localStorage.setItem('car-access-token', data.token);
-            })
-
-
-
-            navigate(from, { replace: true });
-        })
-        .catch(err => console.log(err))
+            .catch(err => console.log(err))
 
     }
     return (
@@ -72,8 +56,12 @@ const Login = () => {
                                 <input className="btn btn-primary" type="submit" value="Login" />
                             </div>
                         </form>
-                        <p className='my-5 text-center'>New to cars Doctor? <Link className='text-orange-500 font-bold' to='/signup'>Sign up</Link></p>
+                        <p className='mt-5 text-center'>New to cars Doctor? <Link className='text-orange-500 font-bold' to='/signup'>Sign up</Link></p>
                     </div>
+
+                    <SocialLogin></SocialLogin>
+
+
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@ import img from '../../assets/images/login/login.svg'
 import { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
 const SignUp = () => {
 
@@ -71,6 +72,8 @@ const SignUp = () => {
                         </form>
                         <p className='my-5 text-center'>Already have an account? <Link className='text-orange-500 font-bold' to='/login'>Login</Link></p>
                     </div>
+
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>
