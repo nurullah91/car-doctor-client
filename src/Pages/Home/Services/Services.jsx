@@ -15,7 +15,7 @@ const Services = () => {
         setSearch(searchRef.current.value)
     }
     useEffect(() => {
-        fetch(`http://localhost:5000/services?search=${search}&sort=${ascending ? "asc" : "dsc"}`)
+        fetch(`https://car-doctor-server-ivory-sigma.vercel.app/services?search=${search}&sort=${ascending ? "asc" : "dsc"}`)
             .then(res => res.json())
             .then(data => setServices(data));
     }, [ascending, search])
